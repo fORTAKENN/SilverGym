@@ -1,0 +1,94 @@
+﻿@using SilverGym.Web.ViewModels.WorkoutPlan
+@using SilverGym.Web.ViewModels.Exercises
+@using SilverGym.Data.Models.Enums
+
+@model WorkoutPlanViewModel
+
+<body>
+
+    <div class="fh5co-loader"></div>
+    <div id="fh5co-schedule" class="fh5co-bg" style="background-image: url(/images/img_bg_1.jpg); margin-bottom : 50px">
+        <div class="container">
+            @if (Model == null)
+            {
+                <h1 style="color: white; text-align: center">Нямаш тренировъчен режим!</h1>
+            }
+            else
+            {
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2 text-center fh5co-heading animate-box">
+                        <h2>Тренировъчен режим</h2>
+                    </div>
+                </div>
+
+                <div class="row animate-box">
+
+                    <div class="fh5co-tabs">
+                        <ul class="fh5co-tab-nav">
+                            @for (int i = 1; i <= Model.WorkoutDays.Count; i++)
+                            {
+                                @if (i == 1)
+                                {
+                                    <li class="active"><a href="#" data-tab="@i"><span class="visible-xs">S</span><span class="hidden-xs">@Model.WorkoutDays[i - 1].WorkDay</span></a></li>
+                                }
+                                else
+                                {
+                                    <li><a href="#" data-tab="@i"><span class="visible-xs">M</span><span class="hidden-xs">@Model.WorkoutDays[i - 1].WorkDay</span></a></li>
+                                }
+                            }
+                        </ul>
+                        
+                        <div class="fh5co-tab-content-wrap">
+
+                            @for (int i = 1; i <= Model.WorkoutDays.Count; i++)
+                            {
+                                @if (i == 1)
+                                {
+                                    <div class="fh5co-tab-content tab-content active" data-tab-content="@i">
+                                        <ul class="class-schedule">
+                                            @foreach (ExerciseViewModel exercise in Model.WorkoutDays[i - 1].Exercises)
+                                            {
+                                                <li class="text-center">
+                                                    <span><img src="~/images/exercises/@(exercise.MuscleGroup).png" class="img-responsive" alt=""></span>
+                                                    <span class="time">@exercise.RepsOrTime</span>
+                                                    <h4>@exercise.Name</h4>
+                                                </li>
+                                            }
+                                        </ul>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="fh5co-tab-content tab-content" data-tab-content="@i">
+                                        <ul class="class-schedule">
+                                            @foreach (ExerciseViewModel exercise in Model.WorkoutDays[i - 1].Exercises)
+                                            {
+                                                <li class="text-center">
+                                                    <span><img src="~/images/exercises/@(exercise.MuscleGroup).png" class="img-responsive" alt=""></span>
+                                                    <span class="time">@exercise.RepsOrTime</span>
+                                                    <h4>@exercise.Name</h4>
+                                                </li>
+                                            }
+                                        </ul>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+  
+    </div>
+
+ 
+
+    <div class="gototop js-top">
+        <a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
+    </div>
+
+
+
+</body>
+

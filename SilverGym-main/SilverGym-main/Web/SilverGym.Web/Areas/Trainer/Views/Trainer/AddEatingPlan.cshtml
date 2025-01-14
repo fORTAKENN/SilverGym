@@ -1,0 +1,32 @@
+﻿@using SilverGym.Web.ViewModels.EatingPlan
+
+@model EatingPlanInputModel
+
+<div class="row">
+    <div class="col-md-12">
+        <form class="mx-auto half-width col-5" enctype="multipart/form-data" method="post" asp-controller="Trainer" asp-action="AddEatingPlan">
+            <div class="top-border-line primary-separator"></div>
+
+
+            <div>
+                <div class="form-group clearfix" id="MealPlansContainer">
+                    <label asp-for="MealPlans" class="suls-text-color">Хранителен режим</label>
+                    <a class="btn btn-success" onclick="AddMoreMealPlans()">+</a>
+                </div>
+            </div>
+
+
+            <input asp-for="ClientId" value="@ViewData["ClientId"]" readonly hidden />
+
+            @await Html.PartialAsync("_ModelErrors")
+
+            <div class="top-border-line primary-separator"></div>
+
+            <button type="submit" class="btn forum-add-bg-color">Добави тренировъчен режим</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/eatingPlanInput.js"></script>
+}
